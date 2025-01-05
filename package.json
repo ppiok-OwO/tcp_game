@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write *.js **/*.js",
     "dev": "npx nodemon src/server.js",
-    "client": "npx nodemon public/client.js"
+    "client": "npx nodemon client.js"
   },
   "keywords": [],
   "author": "",

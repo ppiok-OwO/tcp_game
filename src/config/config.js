@@ -1,0 +1,18 @@
+// 모든 상수, 환경변수들을 config 객체를 통해 관리하겠다!
+import { PORT, HOST, CLIENT_VERSION } from '../constants/env.js';
+import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from '../constants/header.js';
+
+export const config = {
+  server: {
+    port: PORT,
+    host: HOST,
+  },
+  client: {
+    version: CLIENT_VERSION,
+  },
+  packet: {
+    totalLength: TOTAL_LENGTH,
+    typeLength: PACKET_TYPE_LENGTH,
+  },
+  // 필요한 만큼 추가
+};
