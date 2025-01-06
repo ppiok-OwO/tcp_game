@@ -2,6 +2,8 @@ import { config } from '../config/config.js';
 import { PACKET_TYPE, TOTAL_LENGTH } from '../constants/header.js';
 import { getHandlerById } from '../handlers/index.js';
 import { packetParser } from '../utils/parser/packetParser.js';
+import { handleError } from '../utils/error/errorHandler.js';
+import { getUserById } from '../session/user.session.js';
 
 // 데이터는 스트림을 통해 청크단위로 조금씩 전송받게 되는데 우리가 원하는 데이터가 들어올때까지 계속 대기하다가 원하는 데이터가 도착하면 처리하는 형태입니다.
 export const onData = (socket) => async (data) => {

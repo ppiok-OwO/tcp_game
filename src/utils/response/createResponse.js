@@ -28,7 +28,10 @@ export const createResponse = (
   // 헤더 만들어주기
   // (1) 전체 길이를 적어주는 공간 할당
   const packetLength = Buffer.alloc(config.packet.totalLength);
-  packetLength.writeUInt32BE(buffer.length + config.packet.typeLength, 0); // 패킷 길이에 타입 바이트 포함
+  packetLength.writeUInt32BE(
+    buffer.length + config.packet.totalLength + config.packet.typeLength,
+    0,
+  );
   // (2) 패킷 타입을 적어주는 공간 할당
   const packetType = Buffer.alloc(config.packet.typeLength);
   packetType.writeUInt8(PACKET_TYPE.NORMAL, 0);

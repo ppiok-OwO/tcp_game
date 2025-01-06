@@ -5,17 +5,27 @@ import {
   RESPONSE_SUCCESS_CODE,
 } from '../../constants/handlerIds.js';
 import { handleError } from '../../utils/error/errorHandler.js';
+import { findUserByDeviceID, updateUserLogin } from '../../db/user/user.db.js';
+import { createUser } from '../../db/user/user.db.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
   try {
     const { deviceId } = payload;
+
+    let user = await findUserByDeviceID(deviceId);
+
+    if (!user) {
+      user = await createUser(deviceId);
+    } else {
+      await updateUserLogin(user.id);
+    }
 
     addUser(socket, deviceId);
 
     const initailResponse = createResponse(
       HANDLER_IDS.INITIAL,
       RESPONSE_SUCCESS_CODE,
-      { userId: deviceId },
+      { userId: user.id },
       deviceId,
     );
 

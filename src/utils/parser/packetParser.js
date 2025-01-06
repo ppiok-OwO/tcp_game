@@ -1,5 +1,6 @@
 import { getProtoTypeNameByHandlerId } from '../../handlers/index.js';
 import { getProtoMessages } from '../../init/loadProtos.js';
+import { config } from '../../config/config.js';
 
 // 프로토 형식 -> js 객체 형식
 // request를 파싱한다.
