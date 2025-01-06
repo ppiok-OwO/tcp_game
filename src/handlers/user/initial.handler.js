@@ -4,21 +4,26 @@ import {
   HANDLER_IDS,
   RESPONSE_SUCCESS_CODE,
 } from '../../constants/handlerIds.js';
+import { handleError } from '../../utils/error/errorHandler.js';
 
 const initialHandler = async ({ socket, userId, payload }) => {
-  const { deviceId } = payload;
+  try {
+    const { deviceId } = payload;
 
-  addUser(socket, deviceId);
+    addUser(socket, deviceId);
 
-  const initailResponse = createResponse(
-    HANDLER_IDS.INITIAL,
-    RESPONSE_SUCCESS_CODE,
-    { userId: deviceId },
-    deviceId,
-  );
+    const initailResponse = createResponse(
+      HANDLER_IDS.INITIAL,
+      RESPONSE_SUCCESS_CODE,
+      { userId: deviceId },
+      deviceId,
+    );
 
-  // 소켓을 통해 클라이언트에게 응답 메시지 전송
-  socket.write(initailResponse);
+    // 소켓을 통해 클라이언트에게 응답 메시지 전송
+    socket.write(initailResponse);
+  } catch (err) {
+    handleError(socket, err);
+  }
 };
 
 export default initialHandler;
