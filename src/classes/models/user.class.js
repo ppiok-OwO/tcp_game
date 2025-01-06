@@ -10,7 +10,7 @@ class User {
     this.lastUpdateTime = Date.now();
   }
 
-  updatePositon(x, y) {
+  updatePosition(x, y) {
     this.x = x;
     this.y = y;
     this.lastUpdateTime = Date.now();
@@ -33,6 +33,20 @@ class User {
     console.log(
       `Received pong from user ${this.id} at ${now} with latency ${this.latency}ms`,
     );
+  }
+
+  // 추측항법을 사용하여 위치를 추정하는 메서드
+  calculatePosition(latency) {
+    // 세션 내 최고 레이턴시를 인자로 받는다.
+    const timeDiff = latency / 1000; // 레이턴시를 초 단위로 계산
+    const speed = 1; // 편의를 위해 속도 고정
+    const distance = speed * timeDiff;
+
+    // x, y 축에서 이동한 거리 계산
+    return {
+      x: this.x + distance,
+      y: this.y,
+    };
   }
 }
 

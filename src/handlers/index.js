@@ -2,6 +2,7 @@ import { HANDLER_IDS } from '../constants/handlerIds.js';
 import createGameHandler from './game/createGame.handler.js';
 import initialHandler from './user/initial.handler.js';
 import joinGameHandler from './game/joinGame.handler.js';
+import updateLocationHandler from './game/updateLocation.handler.js';
 
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
@@ -15,6 +16,10 @@ const handlers = {
   [HANDLER_IDS.JOIN_GAME]: {
     handler: joinGameHandler,
     protoType: 'game.JoinGamePayload',
+  },
+  [HANDLER_IDS.UPADATE_LOCATION]: {
+    handler: updateLocationHandler,
+    protoType: 'game.LocationUpdatePayload',
   },
 };
 
