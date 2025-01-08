@@ -1,8 +1,9 @@
 import { userSessions } from './sessions.js';
+import User from '../classes/models/user.class.js';
 
 // sequence는 호출 횟수
 export const addUser = (socket, uuid) => {
-  const user = { socket, id: uuid, sequence: 0 };
+  const user = new User(uuid, socket);
   userSessions.push(user);
   return user;
 };
@@ -17,7 +18,7 @@ export const removeUser = (socket) => {
 export const getNextSequence = (id) => {
   const user = getUserById(id);
   if (user) {
-    return ++user.sequence;
+    return user.getNextSequence();
   }
 
   return null;
@@ -25,4 +26,8 @@ export const getNextSequence = (id) => {
 
 export const getUserById = (id) => {
   return userSessions.find((user) => user.id === id);
+};
+
+export const getUserBySocket = (socket) => {
+  return userSessions.find((user) => user.socket === socket);
 };

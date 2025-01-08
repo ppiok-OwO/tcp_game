@@ -48,8 +48,8 @@ export const packetParser = (data) => {
   }
 
   // 스키마의 풀네임을 .으로 split해서 namespace와 type으로 각각 나누어 준다.
-  const [namespace, typeName] = protoTypeName.split('.');
-  const PayloadType = protoMessages[namespace][typeName];
+  const [namespace, type] = protoTypeName.split('.');
+  const PayloadType = protoMessages[namespace][type];
   let payload;
   try {
     // payload의 스키마를 바탕으로 packet.payload의 데이터를 디코딩 해주겠다!
